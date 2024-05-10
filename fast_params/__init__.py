@@ -1,6 +1,5 @@
 import re
-from typing import Any, Dict
-from starlette.datastructures import ImmutableMultiDict
+from typing import Any, Dict, Protocol, runtime_checkable
 
 
 class ParamsTooDeepError(Exception): ...
@@ -13,11 +12,16 @@ PAT = re.compile(r"\[\]")
 PAT2 = re.compile(r"[\[\]]+")
 
 
+@runtime_checkable
+class MultiDict(Protocol):
+    def multi_items(self) -> list[tuple[str, Any]]: ...
+
+
 class ParamParser:
     def __init__(self, param_depth_limit: int = 32) -> None:
         self._param_depth_limit = param_depth_limit
 
-    def __call__(self, form: ImmutableMultiDict[str, Any]) -> Dict[str, Any]:
+    def __call__(self, form: MultiDict) -> Dict[str, Any]:
         js = self._make_params()
         for k, v in form.multi_items():
             self._normalize_params(js, k, v)

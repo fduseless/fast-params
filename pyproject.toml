@@ -1,16 +1,16 @@
 [tool.poetry]
 name = "fast-params"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Chongchen Chen <chenkovsky@qq.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-starlette = ">=0.37.0"
 
 
 [tool.poetry.group.dev.dependencies]
+starlette = ">=0.37.0"
 pytest = "^8.2.0"
 pre-commit = "^3.7.0"
 
