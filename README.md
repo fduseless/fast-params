@@ -4,7 +4,7 @@ Support Rails style QueryParams and FormData for Starlette and FastAPI.
 
 you can also used it in other frameworks, if your params or forms follow this protocol.
 
-```
+```python
 @runtime_checkable
 class MultiDict(Protocol):
     def multi_items(self) -> list[tuple[str, Any]]: ...
